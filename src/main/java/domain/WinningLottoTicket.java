@@ -1,13 +1,13 @@
 package domain;
 
-public class LottoWinningNumbers {
+public class WinningLottoTicket {
 
-	private final LottoTicket winningNumbers;
+	private final LottoTicket lottoTicket;
 	private final LottoNumber bonusNumber;
 
-	public LottoWinningNumbers(LottoTicket winningNumbers, LottoNumber bonusNumber) {
-		validateDuplicateBonusNumber(winningNumbers, bonusNumber);
-		this.winningNumbers = winningNumbers;
+	public WinningLottoTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+		validateDuplicateBonusNumber(lottoTicket, bonusNumber);
+		this.lottoTicket = lottoTicket;
 		this.bonusNumber = bonusNumber;
 	}
 
@@ -18,6 +18,6 @@ public class LottoWinningNumbers {
 	}
 
 	public LottoWinningRank calculateResult(LottoTicket lottoTicket) {
-		return LottoWinningRank.calculateRank(lottoTicket.countSameNumbers(winningNumbers), lottoTicket.contains(bonusNumber));
+		return LottoWinningRank.calculateRank(lottoTicket.countSameNumbers(this.lottoTicket), lottoTicket.contains(bonusNumber));
 	}
 }

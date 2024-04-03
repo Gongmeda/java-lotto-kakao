@@ -7,14 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import domain.LottoGame;
-import domain.LottoGameResult;
-import domain.LottoNumber;
-import domain.LottoTicket;
-import domain.LottoTickets;
-import domain.LottoWinningNumbers;
-import domain.LottoWinningRank;
-
 public class LottoGameTest {
 
 	@Test
@@ -30,12 +22,12 @@ public class LottoGameTest {
 			LottoTicket.of(List.of(1, 2, 3, 4, 5, 6))
 		));
 
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(
 			LottoTicket.of(List.of(1, 2, 3, 4, 5, 6)),
 			new LottoNumber(7)
 		);
 
-		LottoGame lottoGame = new LottoGame(lottoTickets, lottoWinningNumbers);
+		LottoGame lottoGame = new LottoGame(lottoTickets, winningLottoTicket);
 
 		LottoGameResult result = lottoGame.calculateResult();
 

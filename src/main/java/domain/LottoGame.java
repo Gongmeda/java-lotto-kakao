@@ -3,17 +3,17 @@ package domain;
 public class LottoGame {
 
 	private final LottoTickets lottoTickets;
-	private final LottoWinningNumbers lottoWinningNumbers;
+	private final WinningLottoTicket winningLottoTicket;
 
-	public LottoGame(LottoTickets lottoTickets, LottoWinningNumbers lottoWinningNumbers) {
+	public LottoGame(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
 		this.lottoTickets = lottoTickets;
-		this.lottoWinningNumbers = lottoWinningNumbers;
+		this.winningLottoTicket = winningLottoTicket;
 	}
 
 	public LottoGameResult calculateResult() {
 		LottoGameResult result = new LottoGameResult();
 		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-			LottoWinningRank lottoWinningRank = lottoWinningNumbers.calculateResult(lottoTicket);
+			LottoWinningRank lottoWinningRank = winningLottoTicket.calculateResult(lottoTicket);
 			result.add(lottoWinningRank);
 		}
 		return result;
