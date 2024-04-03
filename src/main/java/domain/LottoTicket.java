@@ -18,7 +18,7 @@ public class LottoTicket {
 	}
 
 	public static LottoTicket of(List<Integer> lottoNumbers) {
-		return new LottoTicket(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+		return new LottoTicket(lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList()));
 	}
 
 	public static LottoTicket random() {

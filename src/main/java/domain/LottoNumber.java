@@ -1,19 +1,35 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
+	private static final Map<Integer, LottoNumber> CACHE;
+
+	static {
+		Map<Integer, LottoNumber> cache = new HashMap<>();
+		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+			cache.put(i, new LottoNumber(i));
+		}
+		CACHE = Collections.unmodifiableMap(cache);
+	}
 
 	private final int value;
 
-	public LottoNumber(int value) {
+	private LottoNumber(int value) {
 		validateLottoNumber(value);
 		this.value = value;
+	}
+
+	public static LottoNumber of(int number) {
+		LottoNumber lottoNumber = CACHE.get(number);
+
+		if (lottoNumber == null) {
+			return new LottoNumber(number);
+		}
+		return lottoNumber;
 	}
 
 	private void validateLottoNumber(int value) {
@@ -24,11 +40,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static List<LottoNumber> getAllNumbers() {
-		List<LottoNumber> result = new ArrayList<>();
-		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-			result.add(new LottoNumber(i));
-		}
-		return Collections.unmodifiableList(result);
+		return CACHE.values().stream().collect(Collectors.toUnmodifiableList());
 	}
 
 	@Override

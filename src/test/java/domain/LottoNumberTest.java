@@ -10,8 +10,8 @@ public class LottoNumberTest {
 	@Test
 	void 로또_번호는_1이상_45이하여야합니다() {
 		assertAll(
-			() -> assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoNumber(0)),
-			() -> assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoNumber(46))
+			() -> assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> LottoNumber.of(0)),
+			() -> assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> LottoNumber.of(46))
 		);
 	}
 

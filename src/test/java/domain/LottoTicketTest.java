@@ -43,8 +43,8 @@ public class LottoTicketTest {
 		LottoTicket lottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 6));
 
 		assertAll(
-			() -> assertThat(lottoTicket.contains(new LottoNumber(1))).isTrue(),
-			() -> assertThat(lottoTicket.contains(new LottoNumber(7))).isFalse()
+			() -> assertThat(lottoTicket.contains(LottoNumber.of(1))).isTrue(),
+			() -> assertThat(lottoTicket.contains(LottoNumber.of(7))).isFalse()
 		);
 	}
 
