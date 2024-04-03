@@ -11,11 +11,11 @@ import domain.LottoWinningRank;
 
 public class LottoView {
 
-	private static final Scanner scanner = new Scanner(System.in);
+	private static final Scanner SCANNER = new Scanner(System.in);
 
 	public Cash getCash() {
 		System.out.println("구입금액을 입력해 주세요.");
-		return new Cash(Integer.parseInt(scanner.nextLine()));
+		return new Cash(Integer.parseInt(SCANNER.nextLine()));
 	}
 
 	public void displayPaidTicketCount(int ticketCount) {
@@ -33,7 +33,7 @@ public class LottoView {
 
 	public LottoTicket getWinningNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-		String line = scanner.nextLine();
+		String line = SCANNER.nextLine();
 		List<Integer> numberStrings = Stream.of(line.split(","))
 			.map(String::trim)
 			.map(Integer::parseInt)
@@ -43,7 +43,7 @@ public class LottoView {
 
 	public LottoNumber getBonusNumber() {
 		System.out.println("보너스 볼을 입력해 주세요.");
-		return new LottoNumber(Integer.parseInt(scanner.nextLine()));
+		return new LottoNumber(Integer.parseInt(SCANNER.nextLine()));
 	}
 
 	public void displayResult(LottoGameResult lottoGameResult) {
@@ -81,9 +81,8 @@ public class LottoView {
 	}
 
 	private static List<LottoWinningRank> getRanksExceptLose() {
-		List<LottoWinningRank> ranksExceptLose = Arrays.stream(LottoWinningRank.values())
-			.filter(r -> r != LottoWinningRank.LOSE)
+        return Arrays.stream(LottoWinningRank.values())
+			.filter(rank -> rank != LottoWinningRank.LOSE)
 			.collect(Collectors.toList());
-		return ranksExceptLose;
 	}
 }

@@ -13,10 +13,9 @@ public class LottoController {
 	}
 
 	public void play() {
-		Cash cash = view.getCash();
-		view.displayPaidTicketCount(cash.getTicketCount());
-
-		LottoTickets lottoTickets = LottoTickets.ofRandom(cash.getTicketCount());
+		int ticketCount = view.getCash().getTicketCount();
+		view.displayPaidTicketCount(ticketCount);
+		LottoTickets lottoTickets = LottoTickets.ofRandom(ticketCount);
 		view.displayLottoTickets(lottoTickets);
 
 		LottoTicket winningTicket = view.getWinningNumbers();
