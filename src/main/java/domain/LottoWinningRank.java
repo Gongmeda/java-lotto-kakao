@@ -21,21 +21,14 @@ public enum LottoWinningRank {
 	}
 
 	public static LottoWinningRank calculateRank(int matchCount, boolean hasBonusNumber) {
-		return Arrays.stream(values())
-			.filter(r -> isSecondPrize(matchCount, hasBonusNumber, r))
-			.findFirst()
-			.orElse(LottoWinningRank.calculateRank(matchCount));
-	}
+		if (matchCount == 5 && hasBonusNumber) {
+			return LottoWinningRank.SECOND_PRIZE;
+		}
 
-	private static boolean isSecondPrize(int matchCount, boolean hasBonusNumber, LottoWinningRank lottoWinningRank) {
-		return lottoWinningRank.matchCount == matchCount && lottoWinningRank.matchCount == 5 && lottoWinningRank.requireBonusNumber && hasBonusNumber;
-	}
-
-	private static LottoWinningRank calculateRank(int matchCount) {
 		return Arrays.stream(values())
-			.filter(r -> r.matchCount == matchCount)
-			.findFirst()
-			.orElse(LOSE);
+				.filter(rank -> rank.matchCount == matchCount)
+				.findFirst()
+				.orElse(LOSE);
 	}
 
 	public int getPrize() {
