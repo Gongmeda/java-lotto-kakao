@@ -22,4 +22,9 @@ public class LottoTickets {
 	public List<LottoTicket> getLottoTickets() {
 		return Collections.unmodifiableList(lottoTickets);
 	}
+
+	public LottoTickets add(LottoTickets manualTickets) {
+		lottoTickets.addAll(manualTickets.getLottoTickets());
+		return this;
+	}
 }

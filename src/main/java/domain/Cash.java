@@ -2,7 +2,7 @@ package domain;
 
 public class Cash {
 
-	private final int value;
+	private int value;
 
 	public Cash(int value) {
 		validateNegative(value);
@@ -24,5 +24,10 @@ public class Cash {
 
 	public int getTicketCount() {
 		return value / LottoTicket.PRICE;
+	}
+
+	public void buyTickets(int manualTicketCount) {
+		value -= manualTicketCount * LottoTicket.PRICE;
+		validateNegative(value);
 	}
 }

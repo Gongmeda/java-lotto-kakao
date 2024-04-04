@@ -1,8 +1,4 @@
-import domain.LottoGame;
-import domain.LottoNumber;
-import domain.LottoTicket;
-import domain.LottoTickets;
-import domain.WinningLottoTicket;
+import domain.*;
 
 public class LottoController {
 	private final LottoView view;
@@ -12,16 +8,24 @@ public class LottoController {
 	}
 
 	public void play() {
-		int ticketCount = view.getCash().getTicketCount();
-		view.displayPaidTicketCount(ticketCount);
-		LottoTickets lottoTickets = LottoTickets.ofRandom(ticketCount);
-		view.displayLottoTickets(lottoTickets);
+		Cash cash = view.getCash();
+		int manualTicketCount = view.getManualTicketCount();
+		cash.buyTickets(manualTicketCount);
+		LottoTickets manualTickets = view.getManualTickets(manualTicketCount);
 
-		LottoTicket winningTicket = view.getWinningNumbers();
-		LottoNumber bonusNumber = view.getBonusNumber();
-		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningTicket, bonusNumber);
+		LottoTickets lottoTickets = getLottoTickets(cash, manualTicketCount, manualTickets);
+
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(view.getWinningNumbers(), view.getBonusNumber());
 
 		LottoGame lottoGame = new LottoGame(lottoTickets, winningLottoTicket);
 		view.displayResult(lottoGame.calculateResult());
+	}
+
+	private LottoTickets getLottoTickets(Cash cash, int manualTicketCount, LottoTickets manualTickets) {
+		int randomTicketCount = cash.getTicketCount();
+		view.displayPaidTicketCount(manualTicketCount, randomTicketCount);
+		LottoTickets lottoTickets = manualTickets.add(LottoTickets.ofRandom(randomTicketCount));
+		view.displayLottoTickets(lottoTickets);
+		return lottoTickets;
 	}
 }
